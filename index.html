@@ -444,7 +444,7 @@ body.chaos .card{animation:quake .25s linear infinite,hue 1.2s linear infinite}
    ========================================================= */
 const CONFIG = {
   name: "Mansi",
-  from: "your bestie",            // ← put your name here
+  from: "Neha",
   candles: 5,
   cardMessage: "Happy birthday to my favourite person, the girl with the prettiest curls and the biggest heart! Wishing you a year full of happiness, love, laughter and joy, today and always.",
   // memories: her real photos live ONLY here. Drop more files in assets/ and add a line.
@@ -465,6 +465,8 @@ We met in college as two random people in the same Master's class, and somehow y
 
 You are smart, kind, and you look awesome without even trying. Those curls of yours have more personality than most people I know, and your smile can fix almost any bad day.
 
+And your silly jokes and your beautiful chaos? Nobody makes me laugh the way you do. Even on my worst days, one random joke from you and I'm laughing again. Life would be so boring without your chaos, so please never change.
+
 Thank you for being my partner in crime, my safe place, and the person I can always count on. Life is so much more fun with you in it.
 
 I hope this year brings you everything you've been wishing for: happiness, success, good health, and countless reasons to smile. No matter where life takes us, I hope we always stay this close and keep making memories together.
@@ -475,11 +477,11 @@ Love you 💗
 — {from}`,
   reasons: [
     ["🌀", "your curls have their own personality"],
-    ["😂", "you laugh at my worst jokes"],
+    ["😂", "your silly jokes make me laugh every single time"],
     ["✨", "you look awesome without even trying"],
     ["🤝", "you're always there when it matters"],
     ["🧠", "you're crazy smart but never show off"],
-    ["🎉", "you make boring days fun"],
+    ["🌪️", "your chaos is my favourite kind of chaos"],
     ["🫶", "you're my partner in crime"],
     ["💗", "you're simply the best. no debate."],
   ],
@@ -955,14 +957,14 @@ $("#replayBtn").addEventListener("click", () => {
 });
 
 /* ---------- chaos button ---------- */
-const CHAOS_LABELS = ["do not press", "I SAID DO NOT PRESS", "again?? 😳", "ok you're just like her", "chaos addict 🌀"];
+const CHAOS_LABELS = ["do not press", "I SAID DO NOT PRESS", "again?? 😳", "ok this is very Mansi of you", "chaos addict 🌀"];
 let chaosN = 0, chaosOn = false;
 $("#chaosBtn").addEventListener("click", () => {
   if (chaosOn) return; chaosOn = true; chaosN++; ac(); sfx("boing");
   document.body.classList.add("chaos");
   const targets = $$("h1,h2,p,img,button,svg.arc,.girl,.gift,.polaroid,.ribbon,.frame,.paper", current);
   targets.forEach(el => { el.classList.add("chaos-target"); el.style.rotate = rand(-25, 25).toFixed(0) + "deg"; el.style.scale = rand(.8, 1.25).toFixed(2); });
-  toast(pick(["CHAOS MODE: ON (just like her curls 🌀)", "you were warned ⚠️", "error 418: too much fun", "who let the chaos out?!"]));
+  toast(pick(["CHAOS MODE: ON (Mansi-level chaos 🌀)", "you were warned ⚠️", "error 418: too much fun", "who let the chaos out?!"]));
   emojiRain(40); cannons(1400);
   setTimeout(() => {
     document.body.classList.remove("chaos");
