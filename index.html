@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday Mansi</title>
+<meta name="description" content="I made something for you. Do you wanna see it?">
+<meta property="og:title" content="Mansi, I made something for you 🎀">
+<meta property="og:description" content="Do you wanna see it? (there is only one correct answer)">
+<meta name="theme-color" content="#C62A35">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎀</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=JetBrains+Mono:wght@400;700&family=Pacifico&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C62A35; --red-d:#9B1C27; --pink:#F4A7B6; --pink-l:#FDE4EA; --cream:#FFF8F1;
+  --ink:#4B2328; --gold:#F2C14E; --brown:#7A4630; --paper:#FFFDF9;
+  --display:"Chewy","Comic Sans MS",system-ui,sans-serif;
+  --script:"Pacifico","Brush Script MT",cursive;
+  --hand:"Patrick Hand","Comic Sans MS",cursive;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{
+  background-color:#fff;
+  background-image:
+    linear-gradient(90deg,rgba(198,42,53,.55) 50%,transparent 0),
+    linear-gradient(rgba(198,42,53,.55) 50%,transparent 0);
+  background-size:28px 28px;
+  font-family:var(--hand);color:var(--ink);overflow:hidden;
+  -webkit-user-select:none;user-select:none;
+}
+button{font:inherit;color:inherit;cursor:pointer}
+img{display:block;max-width:100%}
+
+/* ---------- the card ---------- */
+.card{
+  position:fixed;inset:clamp(10px,3vmin,30px);margin:auto;max-width:1120px;max-height:800px;
+  background:var(--cream);border-radius:26px;overflow:hidden;isolation:isolate;
+  box-shadow:0 0 0 5px #fff,0 18px 50px rgba(80,10,20,.35);
+}
+.floaties{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.floaties span{position:absolute;opacity:.28;animation:floaty var(--t,14s) ease-in-out infinite alternate;font-size:var(--s,26px)}
+@keyframes floaty{from{transform:translate(0,0) rotate(-10deg)}to{transform:translate(var(--dx,30px),var(--dy,-40px)) rotate(14deg)}}
+
+.screen{
+  position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
+  overflow-y:auto;overflow-x:hidden;padding:28px 22px 70px;
+  visibility:hidden;opacity:0;
+}
+.screen.sub{padding-top:62px}
+.screen.active{visibility:visible;opacity:1;animation:var(--fx,fx0) .6s cubic-bezier(.2,.9,.3,1.2) both}
+.screen.leaving{visibility:visible;opacity:1;animation:fxOut .35s ease-in both;pointer-events:none}
+.screen>.wrap{margin:auto;width:100%;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;position:relative;z-index:2}
+.fx0{--fx:fx0}.fx1{--fx:fx1}.fx2{--fx:fx2}.fx3{--fx:fx3}
+@keyframes fx0{from{opacity:0;transform:scale(.6) rotate(-8deg)}to{opacity:1;transform:none}}
+@keyframes fx1{from{opacity:0;transform:translateY(60px) rotate(5deg)}to{opacity:1;transform:none}}
+@keyframes fx2{from{opacity:0;transform:perspective(900px) rotateY(-75deg)}to{opacity:1;transform:none}}
+@keyframes fx3{0%{opacity:0;transform:scale(1.4) rotate(12deg)}60%{opacity:1;transform:scale(.95) rotate(-3deg)}100%{transform:none}}
+@keyframes fxOut{to{opacity:0;transform:scale(1.08) rotate(4deg)}}
+
+/* ---------- shared bits ---------- */
+.arc{width:min(96%,660px);height:auto;overflow:visible}
+.arc text{font-family:var(--display);font-size:40px;fill:var(--red);letter-spacing:.5px}
+.big-title{font-family:var(--display);color:var(--red);font-size:clamp(38px,7vw,72px);margin:0;letter-spacing:2px;line-height:1;text-shadow:3px 3px 0 #fff,5px 5px 0 var(--pink)}
+.q{font-family:var(--display);color:var(--red);font-size:clamp(24px,3.8vw,34px);margin:0}
+.pill{
+  font-family:var(--display);font-size:clamp(20px,3vw,27px);color:#fff;background:var(--red);
+  border:0;border-radius:999px;padding:10px 30px;letter-spacing:1.5px;
+  outline:2px dashed #fff;outline-offset:-7px;box-shadow:0 5px 0 var(--red-d),0 8px 18px rgba(155,28,39,.25);
+  transition:transform .15s,box-shadow .15s;position:relative;
+}
+.pill:hover{transform:translateY(-2px) rotate(-2deg)}
+.pill:active{transform:translateY(3px);box-shadow:0 2px 0 var(--red-d)}
+.mini{font-family:var(--hand);font-size:17px;background:#fff;border:2px solid var(--red);color:var(--red);border-radius:999px;padding:4px 14px}
+.mini:hover{background:var(--pink-l)}
+.back{position:absolute;top:14px;left:14px;z-index:5}
+.next{align-self:center}
+.girl{width:clamp(130px,18vw,185px);flex:none;
+  filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(0 8px 10px rgba(80,10,20,.22))}
+.girl svg{width:100%;height:auto;display:block;overflow:visible}
+.wiggle{animation:wiggle 2.6s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg) scale(1.04)}}
+.blob{position:absolute;left:0;top:0;height:100%;width:clamp(46px,12%,140px);z-index:0;pointer-events:none}
+.hint{font-size:clamp(17px,2.2vw,21px);margin:0;color:var(--ink);opacity:.85}
+
+/* ---------- ask ---------- */
+#noBtn{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+#yesBtn{transition:transform .25s}
+.btn-row{display:flex;gap:18px;justify-content:center;align-items:center;flex-wrap:wrap;min-height:70px}
+
+/* ---------- how dare you ---------- */
+.shake{animation:shake .45s ease-in-out infinite}
+@keyframes shake{0%,100%{transform:translate(0) rotate(0)}20%{transform:translate(-4px,2px) rotate(-3deg)}40%{transform:translate(4px,-2px) rotate(3deg)}60%{transform:translate(-3px,-1px) rotate(-2deg)}80%{transform:translate(3px,2px) rotate(2deg)}}
+.err{font:clamp(13px,1.8vw,15px) var(--mono);background:#fff;border:2px dashed var(--red);border-radius:10px;padding:8px 14px;color:var(--red-d);max-width:520px}
+
+/* ---------- excited ---------- */
+.peek{display:flex;flex-direction:column;align-items:center;width:100%}
+.peek .girl{margin-bottom:-18px;position:relative;z-index:3}
+.wall{position:relative;z-index:2;background:var(--brown);border-radius:8px;width:min(100%,400px);height:24px;box-shadow:0 6px 0 #5a3020}
+.wall .btn-row{position:absolute;left:0;right:0;top:34px}
+
+/* ---------- gifts ---------- */
+.gifts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,2.5vw,30px);width:min(100%,760px)}
+.gift{background:none;border:0;padding:0;position:relative;animation:giftbob 2.4s ease-in-out infinite;animation-delay:var(--d,0s)}
+.gift svg{width:100%;height:auto;overflow:visible;filter:drop-shadow(0 8px 8px rgba(155,28,39,.25))}
+.gift:hover{animation:giftshake .5s ease-in-out infinite}
+@keyframes giftbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes giftshake{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg) scale(1.05)}75%{transform:rotate(8deg) scale(1.05)}}
+.gift .lid{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-box:fill-box;transform-origin:10% 100%}
+.gift.open .lid{transform:translate(-6px,-22px) rotate(-28deg)}
+.gift .tag{position:absolute;left:50%;bottom:-8px;transform:translateX(-50%) rotate(-4deg);background:#fff;border:2px solid var(--red);color:var(--red);border-radius:8px;padding:0 8px;font-size:clamp(14px,1.8vw,17px);white-space:nowrap}
+.gift.done .tag{background:var(--red);color:#fff}
+.click-text{font-family:var(--display);color:var(--red);font-size:clamp(26px,4.4vw,42px);letter-spacing:1.5px;margin:6px 0 0;min-height:1.2em}
+.corner-peek{position:absolute;right:4px;bottom:64px;width:clamp(86px,11vw,128px);transform:rotate(-12deg);z-index:1}
+.pulse{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.08) rotate(-2deg)}}
+
+/* ---------- birthday card ---------- */
+.card-grid{display:grid !important;grid-template-columns:1.1fr 1fr;align-items:center;gap:20px;max-width:900px;text-align:left !important;padding-left:clamp(30px,8%,90px)}
+.happy{font-family:var(--display);color:var(--red);font-size:clamp(26px,3.6vw,38px);letter-spacing:3px}
+.birthday{font-family:var(--script);color:var(--red);font-size:clamp(54px,9vw,104px);line-height:1;margin:-4px 0 6px;transform:rotate(-4deg)}
+.bday-text p{font-size:clamp(18px,2.1vw,22px);line-height:1.35;margin:10px 0 16px;max-width:420px}
+.ribbon{display:inline-block;background:var(--red);color:#fff;font-family:var(--script);font-size:clamp(22px,3vw,30px);padding:2px 34px 8px;position:relative;clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%,6% 50%)}
+.photo-side{position:relative;justify-self:center}
+.frame{margin:0;background:var(--red);padding:12px;border-radius:6px;transform:rotate(3deg);box-shadow:0 12px 26px rgba(80,10,20,.3);width:clamp(170px,26vw,290px)}
+.frame-in{border-radius:3px;aspect-ratio:4/5;width:100%;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;
+  background:radial-gradient(circle at 50% 40%,#fff 0 30%,var(--pink-l) 31% 100%)}
+.frame-in .girl{width:82%;filter:none;margin-bottom:-2px}
+.tape{position:absolute;top:-12px;left:50%;width:90px;height:26px;background:rgba(255,255,255,.7);transform:translateX(-50%) rotate(-6deg);z-index:2}
+.frame-hearts{position:absolute;inset:0;pointer-events:none;font-size:clamp(18px,2.4vw,26px)}
+.frame-hearts span{position:absolute;animation:wiggle 2s ease-in-out infinite}
+
+/* ---------- cake ---------- */
+.cake-row{display:flex;align-items:center;justify-content:center;gap:clamp(6px,3vw,40px);width:100%}
+#cake{width:clamp(230px,38vw,360px);height:auto;overflow:visible}
+.flame{cursor:pointer}
+.flame .fl{transform-box:fill-box;transform-origin:50% 90%;animation:flicker .18s ease-in-out infinite alternate}
+.flame.out .fl{animation:none;transform:scale(0);opacity:0;transition:transform .25s,opacity .25s}
+.flame.out .glow{opacity:0;transition:opacity .25s}
+@keyframes flicker{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.92,1.08) rotate(3deg)}}
+.smoke{animation:smoke 1.4s ease-out forwards}
+@keyframes smoke{from{opacity:.8;transform:translateY(0)}to{opacity:0;transform:translateY(-26px)}}
+.doodle{font-family:var(--script);color:var(--red);font-size:clamp(18px,2.4vw,26px);transform:rotate(-14deg);line-height:1.3}
+.hat-girl{width:clamp(110px,15vw,160px)}
+.wish-sub{font:clamp(13px,1.8vw,15px) var(--mono);color:var(--red-d);background:#fff;border-radius:8px;padding:4px 10px;margin:0}
+
+/* ---------- memories ---------- */
+.ransom{margin:0;display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+.ransom span{display:inline-block;font-size:clamp(30px,5.4vw,54px);line-height:1;padding:4px 8px;box-shadow:2px 3px 0 rgba(0,0,0,.18);transform:rotate(var(--r))}
+.r0{background:var(--red);color:#fff;font-family:var(--display)}
+.r1{background:#fff;color:var(--red);font-family:Georgia,serif;font-weight:700}
+.r2{background:var(--pink);color:var(--red-d);font-family:var(--script);font-size:.9em !important}
+.r3{background:#222;color:#fff;font-family:var(--mono);font-weight:700}
+.r4{background:#F9E7B8;color:var(--ink);font-family:var(--hand)}
+.line-scroll{width:100%;overflow-x:auto;overflow-y:visible;padding-bottom:6px;scroll-snap-type:x proximity}
+.line{position:relative;display:flex;gap:clamp(14px,2.2vw,26px);padding:18px 28px 14px;width:max-content;margin:0 auto}
+.line>svg{position:absolute;left:0;top:8px;width:100%;height:40px;overflow:visible;pointer-events:none}
+.polaroid{
+  margin:var(--y,0) 0 0;background:#fff;padding:9px 9px 8px;width:clamp(128px,15.5vw,178px);
+  box-shadow:0 8px 16px rgba(80,10,20,.22);position:relative;transform-origin:50% -14px;
+  animation:sway 3.4s ease-in-out infinite alternate;animation-delay:var(--d,0s);rotate:var(--r,0deg);
+  scroll-snap-align:center;cursor:zoom-in;flex:none;
+}
+@keyframes sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+.polaroid img{aspect-ratio:4/5;object-fit:cover;width:100%;background:#eee}
+.polaroid figcaption{font-size:16px;line-height:1.15;padding-top:7px;min-height:2.3em}
+.polaroid.note{cursor:default;background:var(--pink-l)}
+.polaroid.note .inner{aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;padding:10px;font-size:clamp(17px,2vw,21px);color:var(--red-d);border:2px dashed var(--pink)}
+.pin{position:absolute;left:50%;top:-16px;width:12px;height:30px;background:#C99A6B;border-radius:3px;transform:translateX(-50%);box-shadow:inset -3px 0 0 #A97B4F}
+.pin::after{content:"";position:absolute;left:2px;right:2px;top:12px;height:2px;background:#8a6340}
+#lb{position:fixed;inset:0;background:rgba(40,10,15,.82);display:flex;align-items:center;justify-content:center;z-index:50;padding:20px}
+#lb[hidden]{display:none}
+#lb figure{margin:0;background:#fff;padding:12px 12px 10px;transform:rotate(-2deg);max-width:min(92vw,720px);animation:fx0 .4s both}
+#lb img{max-height:72vh;width:auto;margin:auto}
+#lb figcaption{text-align:center;font-size:22px;padding-top:8px}
+
+/* ---------- letter ---------- */
+.letter-layout{flex:1;display:flex;min-height:0;gap:0;width:100%;max-width:980px;margin:0 auto;position:relative}
+.paper{
+  flex:1;min-height:0;overflow-y:auto;background-color:var(--paper);border-radius:10px 0 0 10px;
+  background-image:linear-gradient(90deg,transparent 46px,rgba(198,42,53,.35) 46px,rgba(198,42,53,.35) 48px,transparent 48px),repeating-linear-gradient(transparent 0 31px,#F1D6DB 31px 32px);
+  background-attachment:local;padding:0 22px 64px 64px;box-shadow:0 8px 24px rgba(80,10,20,.15);text-align:left;position:relative;
+}
+.fav{font-family:var(--script);color:var(--red);font-size:clamp(32px,5vw,50px);font-weight:400;margin:0;height:64px;line-height:64px;white-space:nowrap}
+#letterBody{font-size:clamp(18px,2.1vw,21px);line-height:32px;white-space:pre-line;margin:0;min-height:60vh}
+.strip{width:clamp(56px,16%,170px);border-radius:0 10px 10px 0;background-color:#fff;
+  background-image:linear-gradient(90deg,rgba(198,42,53,.55) 50%,transparent 0),linear-gradient(rgba(198,42,53,.55) 50%,transparent 0);background-size:22px 22px;
+  border-left:3px dotted var(--ink);position:relative}
+.heartpin{position:absolute;top:10px;right:14px;font-size:26px;transform:rotate(14deg);z-index:2}
+.letter-peek{position:absolute;right:6px;bottom:30px;width:clamp(96px,13vw,140px);z-index:3;transform:rotate(-8deg)}
+.skip{position:absolute;right:66px;top:16px;z-index:6}
+
+/* ---------- reasons (flip cards) ---------- */
+.reasons-title{font-size:clamp(34px,6vw,62px)}
+.reasons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,2vw,20px);width:min(100%,840px)}
+.rcard{aspect-ratio:1;perspective:900px;background:none;border:0;padding:0;rotate:var(--r,0deg);transition:rotate .3s}
+.rcard:hover{rotate:0deg}
+.rcard .in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,1.4,.5,1);transform-style:preserve-3d}
+.rcard.flip .in{transform:rotateY(180deg)}
+.rcard .f,.rcard .b{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;box-shadow:0 6px 0 rgba(155,28,39,.35),0 10px 18px rgba(80,10,20,.15)}
+.rcard .f{background:var(--red);color:#fff;font-family:var(--display);font-size:clamp(28px,4.4vw,44px);outline:2px dashed #fff;outline-offset:-9px}
+.rcard .f small{font-family:var(--hand);font-size:15px;opacity:.9}
+.rcard .b{background:#fff;color:var(--ink);transform:rotateY(180deg);font-size:clamp(16px,1.9vw,20px);line-height:1.25;border:3px solid var(--pink)}
+.rcard .b em{font-style:normal;font-size:1.6em;display:block;margin-bottom:4px}
+
+/* ---------- final ---------- */
+.final-text{font-family:var(--display);color:var(--red);font-size:clamp(30px,5.2vw,56px);line-height:1.15;margin:0;max-width:760px;min-height:3.5em;padding-left:clamp(26px,6%,70px)}
+.final-hb{font-family:var(--script);color:var(--red-d);font-size:clamp(28px,4.4vw,46px);margin:0;font-weight:400}
+
+/* ---------- controls & fx ---------- */
+.ctl{position:absolute;z-index:10}
+#musicBtn{top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:2px solid var(--red);background:#fff;color:var(--red);font-size:20px;display:grid;place-items:center}
+#musicBtn.on{background:var(--red);color:#fff;animation:pulse 1s ease-in-out infinite}
+#chaosBtn{right:12px;bottom:12px;background:#FFD166;border:2px solid var(--ink);color:var(--ink);font:700 12px var(--mono);padding:7px 10px;border-radius:8px;box-shadow:3px 3px 0 var(--ink);text-transform:uppercase;letter-spacing:.5px}
+#chaosBtn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
+.spark{position:absolute;font-size:16px;transform:translate(-50%,-50%);animation:spark .9s ease-out forwards;color:var(--red)}
+@keyframes spark{to{opacity:0;transform:translate(calc(-50% + var(--dx,0px)),calc(-50% + var(--dy,-40px))) scale(.4) rotate(90deg)}}
+.rain{position:absolute;top:-60px;animation:fall var(--t,2.4s) linear forwards}
+@keyframes fall{to{transform:translateY(calc(100vh + 120px)) rotate(var(--rot,360deg))}}
+#toast{position:fixed;left:50%;bottom:clamp(22px,5vh,50px);transform:translate(-50%,30px);opacity:0;z-index:60;background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-size:18px;transition:.3s;max-width:90vw;text-align:center;pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+body.chaos .card{animation:quake .25s linear infinite,hue 1.2s linear infinite}
+@keyframes quake{0%,100%{transform:translate(0)}25%{transform:translate(-6px,4px) rotate(-.6deg)}50%{transform:translate(5px,-5px) rotate(.6deg)}75%{transform:translate(-4px,-3px)}}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+.chaos-target{transition:rotate .3s,scale .3s}
+
+/* ---------- mobile ---------- */
+@media (max-width:720px){
+  .screen{padding:24px 14px 74px}
+  .screen.sub{padding-top:60px}
+  .gifts{grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,330px);row-gap:26px}
+  .reasons{grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,420px)}
+  .rcard{aspect-ratio:4/3}
+  .card-grid{grid-template-columns:1fr;text-align:center !important;padding-left:0;justify-items:center}
+  .card-grid .photo-side{order:-1;margin-bottom:14px}
+  .bday-text p{margin-left:auto;margin-right:auto}
+  .blob{width:28px}
+  .doodle{display:none}
+  .hat-girl{position:absolute;right:-8px;top:-40px;width:96px}
+  .cake-row{position:relative}
+  .strip{display:none}
+  .paper{border-radius:10px;padding-left:54px}
+  .paper{background-image:linear-gradient(90deg,transparent 38px,rgba(198,42,53,.35) 38px,rgba(198,42,53,.35) 40px,transparent 40px),repeating-linear-gradient(transparent 0 31px,#F1D6DB 31px 32px)}
+  .corner-peek{bottom:64px;right:-18px}
+  .final-text{padding-left:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<!-- shared SVG defs (gift pattern, flame gradient, candle stripes) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="giftDots" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#E9566A"/>
+      <path d="M8 3 L11 8 L8 13 L5 8Z" fill="#F7A3B1" opacity=".75"/>
+    </pattern>
+    <pattern id="candleStripes" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <rect width="10" height="10" fill="#fff"/><rect width="5" height="10" fill="#C62A35"/>
+    </pattern>
+    <radialGradient id="flameGrad" cx="50%" cy="70%" r="60%">
+      <stop offset="0" stop-color="#FFF4C2"/><stop offset=".45" stop-color="#FFC24A"/><stop offset="1" stop-color="#FF6B3D"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<main class="card" id="card">
+  <div class="floaties" id="floaties"></div>
+
+  <!-- 1. ask -->
+  <section class="screen active" id="s-ask">
+    <div class="wrap">
+      <svg class="arc" viewBox="0 0 640 150" aria-label="I have made something for you">
+        <path id="arcAsk" d="M10 140 Q320 -10 630 140" fill="none"/>
+        <text><textPath href="#arcAsk" startOffset="50%" text-anchor="middle">I have made something for you</textPath></text>
+      </svg>
+      <div class="girl wiggle" data-girl="wave"></div>
+      <p class="q">Do you wanna see it?</p>
+      <div class="btn-row">
+        <button class="pill" id="yesBtn">YES</button>
+        <button class="pill" id="noBtn">NO</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1b. how dare you -->
+  <section class="screen" id="s-howdare">
+    <div class="wrap">
+      <h1 class="big-title shake" id="dareTitle">HOW DARE YOU!?</h1>
+      <div class="girl shake" data-girl="angry"></div>
+      <p class="err">Error 403: saying NO on your own birthday is not allowed.<br>Please try again with the correct answer.</p>
+      <button class="pill" data-go="ask">TRY AGAIN</button>
+    </div>
+  </section>
+
+  <!-- 2. excited -->
+  <section class="screen" id="s-excited">
+    <div class="wrap">
+      <svg class="arc" viewBox="0 0 640 150" aria-label="Are you really excited?">
+        <path id="arcEx" d="M60 135 Q320 10 580 135" fill="none"/>
+        <text><textPath href="#arcEx" startOffset="50%" text-anchor="middle">Are you really excited?</textPath></text>
+      </svg>
+      <div class="peek">
+        <div class="girl" data-girl="peek"></div>
+        <div class="wall">
+          <div class="btn-row">
+            <button class="pill" data-yes>YES</button>
+            <button class="pill" data-yes>YESSS</button>
+          </div>
+        </div>
+      </div>
+      <div style="height:70px"></div>
+    </div>
+  </section>
+
+  <!-- 3. gifts -->
+  <section class="screen" id="s-gifts">
+    <div class="wrap">
+      <svg class="arc" viewBox="0 0 640 150" aria-label="Each gift has something for you">
+        <path id="arcGift" d="M10 140 Q320 -10 630 140" fill="none"/>
+        <text><textPath href="#arcGift" startOffset="50%" text-anchor="middle">Each gift has something for you..</textPath></text>
+      </svg>
+      <div class="gifts" id="gifts"></div>
+      <p class="click-text" id="clickText"></p>
+      <button class="pill pulse" id="finalBtn" data-go="final" hidden>one last thing ›</button>
+    </div>
+    <div class="girl corner-peek" data-girl="wink"></div>
+  </section>
+
+  <!-- 4a. gift 1: birthday card -->
+  <section class="screen sub" id="s-card">
+    <button class="mini back" data-go="gifts">‹ gifts</button>
+    <svg class="blob" viewBox="0 0 140 800" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0H96C40 120 130 230 80 370 30 510 128 620 70 800H0Z" fill="#C62A35"/>
+      <path d="M112 0C56 120 146 230 96 370 46 510 144 620 86 800" fill="none" stroke="#C62A35" stroke-width="3"/>
+    </svg>
+    <div class="wrap card-grid">
+      <div class="bday-text">
+        <div class="happy">HAPPY ✦</div>
+        <div class="birthday">Birthday</div>
+        <p id="cardMsg"></p>
+        <div class="ribbon" id="ribbon">Mansi</div>
+      </div>
+      <div class="photo-side">
+        <figure class="frame"><span class="tape"></span>
+          <div class="frame-in"><div class="girl" data-girl="crown"></div></div>
+        </figure>
+        <div class="frame-hearts" aria-hidden="true"><span style="left:-8%;top:8%">💗</span><span style="right:-6%;top:30%;animation-delay:-.6s">✨</span><span style="left:-4%;bottom:12%;animation-delay:-1.2s">🎈</span></div>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:22px;flex:none"><button class="pill next pulse" data-go="cake">make a wish ›</button></div>
+  </section>
+
+  <!-- 4b. gift 1: cake -->
+  <section class="screen sub" id="s-cake">
+    <button class="mini back" data-go="gifts">‹ gifts</button>
+    <svg class="blob" viewBox="0 0 140 800" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0H70C20 140 110 260 64 400 18 540 104 650 52 800H0Z" fill="#C62A35"/>
+    </svg>
+    <div class="wrap">
+      <h1 class="big-title" id="wishTitle">MAKE A WISH</h1>
+      <div class="cake-row">
+        <div class="doodle">i love<br>you ♡</div>
+        <svg id="cake" viewBox="0 0 320 290" role="img" aria-label="Birthday cake with candles"></svg>
+        <div class="girl hat-girl wiggle" data-girl="party"></div>
+      </div>
+      <p class="hint" id="wishHint">close your eyes, make a wish, then tap each flame to blow it out 💨</p>
+      <p class="wish-sub" id="wishSub" hidden></p>
+      <div class="btn-row" style="min-height:0">
+        <button class="mini" id="micBtn">🎤 or blow into the mic</button>
+        <button class="mini" id="relightBtn" hidden>🕯 light them again</button>
+      </div>
+      <button class="pill pulse" id="wishNext" data-go="gifts" hidden>open the next gift ›</button>
+    </div>
+  </section>
+
+  <!-- 5. gift 2: memories -->
+  <section class="screen sub" id="s-memories">
+    <button class="mini back" data-go="gifts">‹ gifts</button>
+    <div class="wrap">
+      <h1 class="ransom" id="ransom" aria-label="Memories"></h1>
+      <div class="line-scroll"><div class="line" id="line"></div></div>
+      <p class="hint">tap a photo to zoom 🔍 <span id="swipeHint">· swipe for more →</span></p>
+    </div>
+  </section>
+
+  <!-- 6. gift 3: letter -->
+  <section class="screen sub" id="s-letter" style="padding-bottom:20px">
+    <button class="mini back" data-go="gifts">‹ gifts</button>
+    <div class="letter-layout">
+      <div class="paper" id="paper">
+        <span class="heartpin">❤️</span>
+        <h1 class="fav">My fav person</h1>
+        <p id="letterBody"></p>
+      </div>
+      <div class="strip"></div>
+      <div class="girl letter-peek" data-girl="shy"></div>
+    </div>
+    <button class="mini skip" id="skipLetter">skip typing ⏩</button>
+  </section>
+
+  <!-- 7. gift 4: reasons you're my fav -->
+  <section class="screen sub" id="s-reasons">
+    <button class="mini back" data-go="gifts">‹ gifts</button>
+    <div class="wrap">
+      <h1 class="big-title reasons-title">Why you're my fav</h1>
+      <p class="hint" id="reasonsHint">tap every card 👇</p>
+      <div class="reasons" id="reasons"></div>
+    </div>
+  </section>
+
+  <!-- 8. final -->
+  <section class="screen" id="s-final">
+    <svg class="blob" viewBox="0 0 140 800" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0H96C40 120 130 230 80 370 30 510 128 620 70 800H0Z" fill="#C62A35"/>
+    </svg>
+    <div class="wrap">
+      <p class="final-text" id="finalText"></p>
+      <div class="girl wiggle" data-girl="love"></div>
+      <h2 class="final-hb" id="finalHb"></h2>
+      <button class="mini" id="replayBtn">↺ play it all again</button>
+    </div>
+  </section>
+
+  <button class="ctl" id="musicBtn" aria-label="Play birthday song" title="music">♪</button>
+  <button class="ctl" id="chaosBtn">do not press</button>
+</main>
+
+<div id="lb" hidden><figure><img alt=""><figcaption></figcaption></figure></div>
+<div id="fx" aria-hidden="true"></div>
+<div id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+/* =========================================================
+   ✏️  EDIT THIS PART — everything personal lives here
+   ========================================================= */
+const CONFIG = {
+  name: "Mansi",
+  from: "your bestie",            // ← put your name here
+  candles: 5,
+  cardMessage: "Happy birthday to my favourite person, the girl with the prettiest curls and the biggest heart! Wishing you a year full of happiness, love, laughter and joy, today and always.",
+  // memories: her real photos live ONLY here. Drop more files in assets/ and add a line.
+  photos: [
+    { src: "assets/saree.jpg",   caption: "saree day = slay day 💃",          pos: "30% 30%" },
+    { src: "assets/selfie.jpg",  caption: "college corridor chronicles 🎀",   pos: "62% 40%" },
+    { src: "assets/curtain.jpg", caption: "matching smiles, unmatched vibes", pos: "30% 28%" },
+    { note: "more memories coming soon… 💗" },
+  ],
+  letter:
+`Dear {name}, 💗
+
+Happy Birthday, bestie!
+
+I honestly don't know how to put this into words, but I'll try.
+
+We met in college as two random people in the same Master's class, and somehow you became one of my favourite people in the whole world. From silly talks to serious ones, from laughing at nothing to surviving the toughest days together, you've been there for all of it.
+
+You are smart, kind, and you look awesome without even trying. Those curls of yours have more personality than most people I know, and your smile can fix almost any bad day.
+
+Thank you for being my partner in crime, my safe place, and the person I can always count on. Life is so much more fun with you in it.
+
+I hope this year brings you everything you've been wishing for: happiness, success, good health, and countless reasons to smile. No matter where life takes us, I hope we always stay this close and keep making memories together.
+
+Have the happiest birthday!
+
+Love you 💗
+— {from}`,
+  reasons: [
+    ["🌀", "your curls have their own personality"],
+    ["😂", "you laugh at my worst jokes"],
+    ["✨", "you look awesome without even trying"],
+    ["🤝", "you're always there when it matters"],
+    ["🧠", "you're crazy smart but never show off"],
+    ["🎉", "you make boring days fun"],
+    ["🫶", "you're my partner in crime"],
+    ["💗", "you're simply the best. no debate."],
+  ],
+  finalLine: "May all the good things you've been waiting for finally find you this year 💌",
+};
+/* ========================================================= */
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const rand = (a, b) => a + Math.random() * (b - a);
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const fill = s => s.replaceAll("{name}", CONFIG.name).replaceAll("{from}", CONFIG.from);
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const COLORS = ["#C62A35", "#F4A7B6", "#F2C14E", "#ffffff", "#E9566A"];
+
+/* ---------- audio: music-box birthday song + tiny sfx ---------- */
+let actx = null, master = null;
+function ac() {
+  if (!actx) {
+    const C = window.AudioContext || window.webkitAudioContext;
+    if (!C) return null;
+    actx = new C(); master = actx.createGain(); master.gain.value = .9; master.connect(actx.destination);
+  }
+  if (actx.state === "suspended") actx.resume();
+  return actx;
+}
+function tone(freq, t, dur, vol = .15, type = "sine", dest) {
+  const a = ac(); if (!a) return;
+  const o = a.createOscillator(), g = a.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, t);
+  g.gain.setValueAtTime(.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol, t + .015);
+  g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  o.connect(g).connect(dest || master); o.start(t); o.stop(t + dur + .05);
+}
+function sfx(kind) {
+  const a = ac(); if (!a) return; const t = a.currentTime;
+  if (kind === "pop") { tone(620, t, .12, .12, "triangle"); tone(930, t + .05, .14, .09, "triangle"); }
+  if (kind === "boing") {
+    const o = a.createOscillator(), g = a.createGain(); o.type = "sine";
+    o.frequency.setValueAtTime(180, t); o.frequency.exponentialRampToValueAtTime(720, t + .14); o.frequency.exponentialRampToValueAtTime(260, t + .32);
+    g.gain.setValueAtTime(.16, t); g.gain.exponentialRampToValueAtTime(.0001, t + .36);
+    o.connect(g).connect(master); o.start(t); o.stop(t + .4);
+  }
+  if (kind === "puff") {
+    const len = a.sampleRate * .3, buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
+    const s = a.createBufferSource(), f = a.createBiquadFilter(), g = a.createGain();
+    f.type = "lowpass"; f.frequency.value = 900; g.gain.value = .35; s.buffer = buf;
+    s.connect(f).connect(g).connect(master); s.start(t);
+  }
+  if (kind === "tada") [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tone(f, t + i * .09, .5, .12, "triangle"));
+}
+const NOTES = { G4: 392, A4: 440, B4: 493.88, C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99 };
+const SONG = [["G4",.75],["G4",.25],["A4",1],["G4",1],["C5",1],["B4",2],
+              ["G4",.75],["G4",.25],["A4",1],["G4",1],["D5",1],["C5",2],
+              ["G4",.75],["G4",.25],["G5",1],["E5",1],["C5",1],["B4",1],["A4",2],
+              ["F5",.75],["F5",.25],["E5",1],["C5",1],["D5",1],["C5",3]];
+let songBus = null, songTimer = null, looping = false, songPlaying = false;
+function playSong(loop = false) {
+  const a = ac(); if (!a) return;
+  stopSong(true);
+  looping = loop; songPlaying = true;
+  songBus = a.createGain(); songBus.gain.value = 1; songBus.connect(master);
+  const beat = .4; let t = a.currentTime + .08;
+  for (const [n, d] of SONG) {
+    const f = NOTES[n];
+    tone(f, t, Math.max(d * beat * 1.8, .55), .16, "triangle", songBus);
+    tone(f * 2, t, d * beat, .035, "sine", songBus);
+    t += d * beat;
+  }
+  const total = (t - a.currentTime) * 1000 + 300;
+  songTimer = setTimeout(() => { songPlaying = false; if (looping) playSong(true); else setMusicUI(false); }, total);
+  setMusicUI(true);
+}
+function stopSong(silent) {
+  clearTimeout(songTimer); songPlaying = false;
+  if (songBus && actx) { const b = songBus; b.gain.setTargetAtTime(0, actx.currentTime, .05); setTimeout(() => b.disconnect(), 400); }
+  songBus = null; if (!silent) { looping = false; setMusicUI(false); }
+}
+function setMusicUI(on) { $("#musicBtn").classList.toggle("on", on); $("#musicBtn").textContent = on ? "♫" : "♪"; }
+$("#musicBtn").addEventListener("click", () => { if (songPlaying) stopSong(); else { playSong(true); toast("🎶 happy birthday to youuu"); } });
+function songOnce() { if (!songPlaying) playSong(false); }
+
+/* ---------- fx: confetti, sparkles, emoji rain, toast ---------- */
+const fx = $("#fx");
+function boom(o = {}) {
+  if (!window.confetti) return;
+  confetti(Object.assign({ particleCount: 110, spread: 80, origin: { y: .6 }, colors: COLORS, zIndex: 45, disableForReducedMotion: true }, o));
+}
+function cannons(ms = 2200) {
+  const end = Date.now() + ms;
+  (function f() {
+    boom({ particleCount: 5, angle: 60, spread: 60, origin: { x: 0, y: .75 } });
+    boom({ particleCount: 5, angle: 120, spread: 60, origin: { x: 1, y: .75 } });
+    if (Date.now() < end) requestAnimationFrame(f);
+  })();
+}
+function burstAt(el, n = 70) {
+  const r = el.getBoundingClientRect();
+  boom({ particleCount: n, spread: 90, startVelocity: 32, origin: { x: (r.left + r.width / 2) / innerWidth, y: (r.top + r.height / 2) / innerHeight } });
+}
+function spark(x, y, ch, dx, dy) {
+  const s = document.createElement("span");
+  s.className = "spark"; s.textContent = ch || pick(["✦", "♥", "✧", "✦", "🌀"]);
+  s.style.left = x + "px"; s.style.top = y + "px";
+  s.style.color = pick(["#C62A35", "#E9566A", "#F2C14E", "#F4A7B6"]);
+  s.style.setProperty("--dx", (dx ?? rand(-26, 26)) + "px");
+  s.style.setProperty("--dy", (dy ?? rand(-50, -20)) + "px");
+  fx.appendChild(s); setTimeout(() => s.remove(), 950);
+}
+let lastSpark = 0;
+if (!REDUCED) {
+  addEventListener("pointermove", e => {
+    const now = performance.now(); if (now - lastSpark < 50) return; lastSpark = now; spark(e.clientX, e.clientY);
+  }, { passive: true });
+  addEventListener("pointerdown", e => {
+    for (let i = 0; i < 7; i++) { const a = i / 7 * Math.PI * 2; spark(e.clientX, e.clientY, pick(["✦", "♥", "✧"]), Math.cos(a) * 46, Math.sin(a) * 46); }
+  }, { passive: true });
+}
+function emojiRain(n = 36, set = ["🎂", "🎈", "🎀", "💗", "🌀", "✨", "🧁", "🥳", "🫶"]) {
+  for (let i = 0; i < n; i++) {
+    const s = document.createElement("span");
+    s.className = "rain"; s.textContent = pick(set);
+    s.style.left = rand(0, 100) + "vw"; s.style.fontSize = rand(22, 46) + "px";
+    s.style.setProperty("--t", rand(1.8, 3.4) + "s"); s.style.setProperty("--rot", rand(-540, 540) + "deg");
+    s.style.animationDelay = rand(0, 1.2) + "s";
+    fx.appendChild(s); setTimeout(() => s.remove(), 5000);
+  }
+}
+let toastT;
+function toast(msg, ms = 2600) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), ms); }
+
+/* background floaties */
+(function () {
+  const f = $("#floaties"), set = ["🎈", "🎀", "✨", "💗", "🎂", "🌀", "🫶", "🧁", "⭐", "🎉"];
+  for (let i = 0; i < 16; i++) {
+    const s = document.createElement("span"); s.textContent = set[i % set.length];
+    s.style.left = rand(2, 94) + "%"; s.style.top = rand(2, 92) + "%";
+    s.style.setProperty("--s", rand(18, 34) + "px"); s.style.setProperty("--t", rand(9, 18) + "s");
+    s.style.setProperty("--dx", rand(-50, 50) + "px"); s.style.setProperty("--dy", rand(-60, 30) + "px");
+    s.style.animationDelay = -rand(0, 10) + "s";
+    f.appendChild(s);
+  }
+})();
+
+/* ---------- the cute curly-haired girl sticker (one drawing, many moods) ---------- */
+function girl(mood) {
+  const skin = "#D99A72", skinS = "#C4825C", hair = "#2A1A16", hair2 = "#4A2E26", ink = "#22140F", lip = "#8E1B24";
+  const c = (x, y, r, f) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${f}"/>`;
+  const heart = (x, y, s, f = "#E9566A") => `<path transform="translate(${x} ${y}) scale(${s})" d="M0 3C0-2-7-2-7 3C-7 7 0 11 0 13C0 11 7 7 7 3C7-2 0-2 0 3Z" fill="${f}"/>`;
+  const curls = [[100,30,26],[70,38,24],[130,38,24],[44,62,22],[156,62,22],[30,92,19],[170,92,19],[28,120,18],[172,120,18],[32,146,17],[168,146,17],[42,170,15],[158,170,15]];
+  const fringe = [[60,74,15],[78,63,16],[100,59,17],[122,63,16],[140,74,15],[50,90,11],[150,90,11]];
+  const curlLine = ([x, y, r]) => `<path d="M${x - r * .4} ${y} a${r * .4} ${r * .4} 0 1 1 ${r * .4} ${r * .4}" stroke="${hair2}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+  const eyeOpen = x => `<ellipse cx="${x}" cy="112" rx="7.5" ry="9.5" fill="${ink}"/>${c(x + 2.5, 108, 3, "#fff")}${c(x - 2, 116, 1.4, "#fff")}`;
+  const eyeHappy = x => `<path d="M${x - 9} 114 Q${x} 103 ${x + 9} 114" stroke="${ink}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+  const eyes = {
+    open: eyeOpen(80) + eyeOpen(120),
+    happy: eyeHappy(80) + eyeHappy(120),
+    wink: eyeHappy(80) + eyeOpen(120),
+    angry: eyeOpen(80) + eyeOpen(120) + `<path d="M68 96 L90 104 M132 96 L110 104" stroke="${ink}" stroke-width="4.5" stroke-linecap="round"/>`,
+  };
+  const mouths = {
+    smile: `<path d="M90 133 Q100 143 110 133" stroke="${lip}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`,
+    open: `<path d="M88 131 Q100 150 112 131Z" fill="${lip}"/><path d="M93 140 Q100 147 107 140 Q100 137 93 140Z" fill="#F48FA0"/>`,
+    pout: `<path d="M92 140 Q100 132 108 140" stroke="${lip}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`,
+  };
+  const acc = {
+    bow: `<g transform="translate(142 44) rotate(15)"><path d="M0 0L-18-10Q-23 0-18 10Z M0 0L18-10Q23 0 18 10Z" fill="#F4A7B6"/>${c(0, 0, 5, "#E9566A")}</g>`,
+    hat: `<g transform="translate(112 6) rotate(16)"><path d="M0-30L22 26H-22Z" fill="#F2C14E"/><path d="M0-30L7-12H-7Z M-11 0H11L15 11H-15Z M-18 17H18L21 26H-21Z" fill="#C62A35"/>${c(0, -31, 7, "#F4A7B6")}</g>`,
+    crown: `<g transform="translate(100 8) rotate(-8)"><path d="M-28 14V-8L-14 4 0-16 14 4 28-8V14Z" fill="#F2C14E" stroke="#D9A21E" stroke-width="2"/>${c(0, -16, 4, "#E9566A")}${c(-28, -8, 3.5, "#E9566A")}${c(28, -8, 3.5, "#E9566A")}</g>`,
+    anger: `<g transform="translate(166 34)" stroke="#C62A35" stroke-width="5" stroke-linecap="round" fill="none"><path d="M-12-4Q-4-4-4-12 M4-12Q4-4 12-4 M12 4Q4 4 4 12 M-4 12Q-4 4-12 4"/></g>`,
+    hearts: heart(22, 40, 1.4) + heart(178, 30, 1.1, "#F4A7B6") + heart(186, 80, .9),
+  };
+  const hand = (x, y) => `<circle cx="${x}" cy="${y}" r="13" fill="${skin}" stroke="${skinS}" stroke-width="2.5"/>` + `<path d="M${x - 6} ${y - 8}v7M${x} ${y - 10}v8M${x + 6} ${y - 8}v7" stroke="${skinS}" stroke-width="2" stroke-linecap="round"/>`;
+  const hands = {
+    wave: `<path d="M150 190 Q176 172 174 146" stroke="${skin}" stroke-width="16" fill="none" stroke-linecap="round"/>${hand(174, 136)}<path d="M190 118q8 10 0 20M198 112q12 16 0 32" stroke="#C62A35" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+    peek: hand(62, 202) + hand(138, 202),
+    shy: hand(60, 136) + hand(140, 136),
+    heart: `<g stroke="#fff" stroke-width=".7">${heart(100, 168, 3.2, "#F4A7B6")}</g>` + hand(76, 200) + hand(124, 200),
+  };
+  const M = {
+    wave:  ["open", "open", ["bow"], "wave"],
+    angry: ["angry", "pout", ["anger"], ""],
+    peek:  ["open", "open", ["bow"], "peek"],
+    wink:  ["wink", "smile", ["bow"], ""],
+    crown: ["happy", "open", ["crown", "hearts"], ""],
+    party: ["happy", "open", ["hat"], ""],
+    shy:   ["happy", "smile", ["bow", "hearts"], "shy"],
+    love:  ["happy", "smile", ["bow", "hearts"], "heart"],
+  }[mood] || ["open", "smile", ["bow"], ""];
+  return `<svg viewBox="0 -34 200 250" aria-hidden="true">
+    <ellipse cx="100" cy="102" rx="70" ry="70" fill="${hair}"/>
+    ${curls.map(([x, y, r]) => c(x, y, r, hair)).join("")}${curls.filter((_, i) => i % 2).map(curlLine).join("")}
+    <rect x="89" y="146" width="22" height="24" rx="6" fill="${skinS}"/>
+    <path d="M38 212 C42 178 68 166 100 166 C132 166 158 178 162 212Z" fill="#C62A35"/>
+    <path d="M86 166 Q100 184 114 166Z" fill="${skinS}"/>
+    ${c(49, 114, 9, skin)}${c(151, 114, 9, skin)}
+    <path d="M43 136Q49 124 55 136Z M145 136Q151 124 157 136Z" fill="#F2C14E"/>${c(49, 138, 2, "#F2C14E")}${c(151, 138, 2, "#F2C14E")}
+    <ellipse cx="100" cy="108" rx="52" ry="50" fill="${skin}"/>
+    ${fringe.map(([x, y, r]) => c(x, y, r, hair)).join("")}${fringe.slice(0, 5).filter((_, i) => i % 2 === 0).map(curlLine).join("")}
+    ${c(100, 92, 2.8, "#C62A35")}
+    <ellipse cx="68" cy="128" rx="9" ry="5.5" fill="#F2879A" opacity=".65"/><ellipse cx="132" cy="128" rx="9" ry="5.5" fill="#F2879A" opacity=".65"/>
+    ${eyes[M[0]]}${mouths[M[1]]}${M[2].map(a => acc[a]).join("")}${hands[M[3]] || ""}
+  </svg>`;
+}
+$$("[data-girl]").forEach(el => { el.innerHTML = girl(el.dataset.girl); });
+
+/* ---------- typewriter ---------- */
+function typeText(el, text, speed = 24, onStep) {
+  let skip = false, i = 0; const chars = [...text];
+  const ctl = { skip: () => { skip = true; } };
+  ctl.done = new Promise(res => {
+    el.textContent = "";
+    (function step() {
+      if (skip) { el.textContent = text; onStep && onStep(); return res(); }
+      el.textContent = chars.slice(0, ++i).join(""); onStep && onStep();
+      if (i < chars.length) setTimeout(step, chars[i - 1] === "\n" ? speed * 6 : speed); else res();
+    })();
+  });
+  return ctl;
+}
+
+/* ---------- navigation ---------- */
+let current = $("#s-ask");
+const hooks = {};
+function go(id) {
+  const next = $("#s-" + id); if (!next || next === current) return;
+  const prev = current;
+  prev.classList.remove("active", "fx0", "fx1", "fx2", "fx3"); prev.classList.add("leaving");
+  setTimeout(() => prev.classList.remove("leaving"), 380);
+  next.classList.remove("fx0", "fx1", "fx2", "fx3");
+  void next.offsetWidth;
+  next.classList.add("active", "fx" + Math.floor(Math.random() * 4));
+  next.scrollTop = 0; current = next;
+  hooks[id] && hooks[id]();
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-go]"); if (b) { sfx("pop"); go(b.dataset.go); }
+});
+
+/* ---------- 1. ask (runaway NO) ---------- */
+const NO_TEXT = ["NO", "are you sure?", "think again 🤨", `${CONFIG.name} pls 🥺`, "wrong button!", "ok fine, click me 😤"];
+const MAX_DODGE = NO_TEXT.length - 1;
+let dodges = 0;
+const noBtn = $("#noBtn"), yesBtn = $("#yesBtn");
+function dodge() {
+  if (dodges >= MAX_DODGE) return;
+  dodges++; sfx("boing");
+  const scr = $("#s-ask").getBoundingClientRect();
+  noBtn.style.transform = "none";
+  const r = noBtn.getBoundingClientRect();
+  const pad = 16;
+  const tx = rand(scr.left + pad, scr.right - r.width - pad) - r.left;
+  const ty = rand(scr.top + pad, scr.bottom - r.height - 70) - r.top;
+  noBtn.style.transform = `translate(${tx}px, ${ty}px) rotate(${rand(-20, 20)}deg)`;
+  noBtn.textContent = NO_TEXT[dodges];
+  yesBtn.style.transform = `scale(${1 + dodges * .14})`;
+  if (dodges === MAX_DODGE) noBtn.style.transform = `translate(${tx}px, ${ty}px) rotate(0deg) scale(.9)`;
+}
+noBtn.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") dodge(); });
+noBtn.addEventListener("click", () => { if (dodges < MAX_DODGE) dodge(); else { sfx("boing"); go("howdare"); } });
+yesBtn.addEventListener("click", () => { sfx("tada"); burstAt(yesBtn); go("excited"); });
+hooks.ask = () => { dodges = 0; noBtn.textContent = "NO"; noBtn.style.transform = ""; yesBtn.style.transform = ""; };
+hooks.howdare = () => { const t = $("#dareTitle"); typeText(t, "HOW DARE YOU!?", 70); emojiRain(18, ["😤", "😠", "❌", "💢"]); };
+
+/* ---------- 2. excited ---------- */
+$$("[data-yes]").forEach(b => b.addEventListener("click", () => { sfx("tada"); burstAt(b, 90); go("gifts"); }));
+
+/* ---------- 3. gifts ---------- */
+const GIFTS = [
+  { go: "card", label: "bday card 🎂" },
+  { go: "memories", label: "memories 📸" },
+  { go: "letter", label: "a letter 💌" },
+  { go: "reasons", label: "why you're my fav 💗" },
+];
+const opened = new Set();
+const giftSVG = `<svg viewBox="0 0 120 124" aria-hidden="true">
+  <g class="box"><rect x="16" y="54" width="88" height="64" rx="6" fill="url(#giftDots)"/>
+    <rect x="16" y="54" width="88" height="10" fill="#000" opacity=".08"/>
+    <rect x="53" y="54" width="14" height="64" fill="#B71C2C"/></g>
+  <g class="lid"><rect x="10" y="40" width="100" height="18" rx="5" fill="#EF6A7D"/>
+    <rect x="53" y="40" width="14" height="18" fill="#B71C2C"/>
+    <path d="M60 41 C44 14 22 26 40 38 C46 42 54 42 60 41Z M60 41 C76 14 98 26 80 38 C74 42 66 42 60 41Z" fill="#B71C2C"/>
+    <circle cx="60" cy="40" r="6" fill="#8E1520"/></g></svg>`;
+GIFTS.forEach((g, i) => {
+  const b = document.createElement("button");
+  b.className = "gift"; b.style.setProperty("--d", i * .3 + "s");
+  b.setAttribute("aria-label", "Open gift " + (i + 1));
+  b.innerHTML = giftSVG + `<span class="tag">#${i + 1}</span>`;
+  b.addEventListener("click", () => {
+    if (b.classList.contains("open")) return;
+    b.classList.add("open"); sfx("pop"); burstAt(b, 60);
+    opened.add(g.go);
+    setTimeout(() => { go(g.go); b.classList.remove("open"); b.classList.add("done"); b.querySelector(".tag").textContent = g.label; }, 650);
+  });
+  $("#gifts").appendChild(b);
+});
+let clickTyper;
+hooks.gifts = () => {
+  const all = opened.size === GIFTS.length;
+  clickTyper && clickTyper.skip();
+  clickTyper = typeText($("#clickText"), all ? "ALL GIFTS OPENED! 🎉" : (opened.size ? "keep going… 👀" : "CLICK ON THE GIFTS"), 55);
+  $("#finalBtn").hidden = !all;
+  if (all) { setTimeout(() => boom({ particleCount: 80 }), 400); }
+};
+
+/* ---------- 4a. birthday card ---------- */
+$("#cardMsg").textContent = fill(CONFIG.cardMessage);
+$("#ribbon").textContent = CONFIG.name;
+hooks.card = () => setTimeout(() => boom({ particleCount: 70, origin: { x: .75, y: .4 } }), 300);
+
+/* ---------- 4b. cake ---------- */
+function frosting(x0, x1, y, color, seed) {
+  const k = 7, w = (x1 - x0) / k, deps = [14, 6, 19, 9, 13, 21, 8];
+  let d = `M${x0} ${y - 2} H${x1} V${y + 10}`;
+  for (let i = k - 1; i >= 0; i--) {
+    const a = x0 + w * (i + 1), b = x0 + w * i, m = (a + b) / 2, dep = y + 10 + deps[(i + seed) % 7];
+    d += ` C${a} ${y + 10} ${a - w * .05} ${dep} ${m} ${dep} C${b + w * .05} ${dep} ${b} ${y + 10} ${b} ${y + 10}`;
+  }
+  return `<path d="${d}Z" fill="${color}"/>`;
+}
+let litCount = 0, wishDone = false;
+function buildCake() {
+  const n = CONFIG.candles, L = 96, R = 224;
+  const xs = Array.from({ length: n }, (_, i) => n === 1 ? 160 : L + (R - L) * i / (n - 1));
+  let s = `<defs><clipPath id="t1"><rect x="30" y="188" width="260" height="78" rx="16"/></clipPath>
+           <clipPath id="t2"><rect x="68" y="118" width="184" height="74" rx="12"/></clipPath></defs>
+    <ellipse cx="160" cy="270" rx="156" ry="14" fill="#fff" stroke="#EBC9CF" stroke-width="2"/>
+    <rect x="30" y="188" width="260" height="78" rx="16" fill="#FFF1E4"/>
+    <g clip-path="url(#t1)">${frosting(30, 290, 188, "#F4A7B6", 0)}</g>
+    ${[50, 80, 110, 140, 170, 200, 230, 260].map((x, i) => `<circle cx="${x}" cy="${240 + (i % 2) * 8}" r="4.5" fill="${i % 2 ? "#C62A35" : "#F2C14E"}"/>`).join("")}
+    <rect x="68" y="118" width="184" height="74" rx="12" fill="#F7C9D2"/>
+    <g clip-path="url(#t2)">${frosting(68, 252, 118, "#C62A35", 3)}</g>
+    ${[90, 125, 160, 195, 230].map(x => `<text x="${x}" y="178" font-size="13" text-anchor="middle" fill="#fff">♥</text>`).join("")}`;
+  xs.forEach((x, i) => {
+    s += `<rect x="${x - 5}" y="78" width="10" height="42" rx="3" fill="url(#candleStripes)" stroke="#C62A35" stroke-width=".6"/>
+      <line x1="${x}" y1="70" x2="${x}" y2="79" stroke="#4B2328" stroke-width="2"/>
+      <g class="flame" data-i="${i}" transform="translate(${x} 60)">
+        <circle class="glow" r="17" fill="#F2C14E" opacity=".28"/>
+        <g class="fl"><path d="M0 -17 C7 -6 9 3 0 9 C-9 3 -7 -6 0 -17Z" fill="url(#flameGrad)"/>
+        <path d="M0 -5 C3 0 3 4 0 6 C-3 4 -3 0 0 -5Z" fill="#FFF7D6"/></g>
+        <circle r="22" fill="transparent"/>
+      </g>`;
+  });
+  $("#cake").innerHTML = s;
+  litCount = n;
+  $$("#cake .flame").forEach(f => f.addEventListener("click", () => blowOut(f)));
+}
+function blowOut(f) {
+  if (!f || f.classList.contains("out")) return;
+  f.classList.add("out"); sfx("puff"); litCount--;
+  const ns = "http://www.w3.org/2000/svg", p = document.createElementNS(ns, "path");
+  p.setAttribute("d", "M0 -4 C-6 -12 6 -18 0 -26 C-6 -34 6 -40 0 -48");
+  p.setAttribute("stroke", "#b9b0b2"); p.setAttribute("fill", "none"); p.setAttribute("stroke-width", "3"); p.setAttribute("stroke-linecap", "round");
+  p.classList.add("smoke"); f.appendChild(p); setTimeout(() => p.remove(), 1500);
+  if (litCount === 0) wishGranted();
+}
+function blowNext() { blowOut($$("#cake .flame").find(f => !f.classList.contains("out"))); }
+function wishGranted() {
+  wishDone = true;
+  $("#wishTitle").textContent = "WISH GRANTED ✨";
+  $("#wishHint").textContent = `your wish has been sent to the universe, ${CONFIG.name} ✨`;
+  const sub = $("#wishSub"); sub.hidden = false; sub.textContent = "bestie-approved · 100% coming true this year 💗";
+  $("#relightBtn").hidden = false; $("#micBtn").hidden = true; $("#wishNext").hidden = false;
+  sfx("tada"); cannons(2400); setTimeout(songOnce, 600);
+}
+$("#relightBtn").addEventListener("click", () => {
+  wishDone = false; buildCake();
+  $("#wishTitle").textContent = "MAKE A WISH";
+  $("#wishHint").textContent = "close your eyes, make a wish, then tap each flame to blow it out 💨";
+  $("#wishSub").hidden = true; $("#relightBtn").hidden = true; $("#micBtn").hidden = false; $("#wishNext").hidden = true;
+});
+$("#micBtn").addEventListener("click", async () => {
+  const btn = $("#micBtn");
+  if (!navigator.mediaDevices?.getUserMedia) { toast("no mic here, tap the flames instead 💨"); return; }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const a = ac(), src = a.createMediaStreamSource(stream), an = a.createAnalyser();
+    an.fftSize = 512; src.connect(an);
+    const buf = new Uint8Array(an.fftSize); let last = 0;
+    btn.textContent = "🎤 listening… blow!";
+    (function loop(ts) {
+      an.getByteTimeDomainData(buf);
+      let sum = 0; for (const v of buf) { const x = (v - 128) / 128; sum += x * x; }
+      if (Math.sqrt(sum / buf.length) > .16 && ts - last > 150) { last = ts; blowNext(); }
+      if (litCount > 0 && current.id === "s-cake") requestAnimationFrame(loop);
+      else { stream.getTracks().forEach(t => t.stop()); src.disconnect(); btn.textContent = "🎤 or blow into the mic"; }
+    })(0);
+  } catch (e) { toast("no mic access, tap the flames instead 💨"); }
+});
+buildCake();
+
+/* ---------- 5. memories ---------- */
+(function () {
+  const word = "MEMORIES";
+  $("#ransom").innerHTML = [...word].map((c, i) => `<span class="r${(i * 3 + 1) % 5}" style="--r:${rand(-9, 9).toFixed(1)}deg">${c}</span>`).join("");
+  const line = $("#line"), items = CONFIG.photos, n = items.length;
+  line.innerHTML = `<svg viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M0 4 Q50 36 100 4" stroke="#8C2A33" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/></svg>`;
+  items.forEach((it, i) => {
+    const t = n === 1 ? .5 : i / (n - 1), y = (1 - t) * (1 - t) * 4 + 2 * (1 - t) * t * 36 + t * t * 4;
+    const f = document.createElement("figure");
+    f.className = "polaroid" + (it.note ? " note" : "");
+    f.style.setProperty("--y", y.toFixed(1) + "px");
+    f.style.setProperty("--r", rand(-5, 5).toFixed(1) + "deg");
+    f.style.setProperty("--d", (-i * .7).toFixed(1) + "s");
+    f.innerHTML = it.note
+      ? `<span class="pin"></span><div class="inner">${it.note}</div><figcaption>&nbsp;</figcaption>`
+      : `<span class="pin"></span><img src="${it.src}" alt="${it.caption}" loading="lazy" style="object-position:${it.pos || "50% 50%"}"><figcaption>${it.caption}</figcaption>`;
+    if (!it.note) f.addEventListener("click", () => openLB(it));
+    line.appendChild(f);
+  });
+})();
+function openLB(it) {
+  const lb = $("#lb"); $("img", lb).src = it.src; $("figcaption", lb).textContent = it.caption; lb.hidden = false; sfx("pop");
+}
+$("#lb").addEventListener("click", () => { $("#lb").hidden = true; });
+addEventListener("keydown", e => { if (e.key === "Escape") $("#lb").hidden = true; });
+hooks.memories = () => {
+  const sc = $(".line-scroll"); sc.scrollLeft = 0;
+  $("#swipeHint").hidden = sc.scrollWidth <= sc.clientWidth + 24;
+};
+
+/* ---------- 6. letter ---------- */
+let letterTyper = null, letterTyped = false;
+hooks.letter = () => {
+  const skip = $("#skipLetter");
+  if (letterTyped) { skip.hidden = true; return; }
+  const paper = $("#paper"); skip.hidden = false;
+  letterTyper = typeText($("#letterBody"), fill(CONFIG.letter), 16, () => { if (!letterTyped) paper.scrollTop = paper.scrollHeight; });
+  letterTyper.done.then(() => { letterTyped = true; skip.hidden = true; boom({ particleCount: 60, origin: { x: .5, y: .8 } }); });
+};
+$("#skipLetter").addEventListener("click", () => letterTyper && letterTyper.skip());
+
+/* ---------- 7. reasons you're my fav (flip cards) ---------- */
+function buildReasons() {
+  const box = $("#reasons"); box.innerHTML = "";
+  $("#reasonsHint").textContent = "tap every card 👇";
+  CONFIG.reasons.forEach(([emo, txt], i) => {
+    const b = document.createElement("button");
+    b.className = "rcard"; b.style.setProperty("--r", rand(-6, 6).toFixed(1) + "deg");
+    b.innerHTML = `<div class="in"><div class="f">#${i + 1}<small>tap me</small></div><div class="b"><em>${emo}</em>${txt}</div></div>`;
+    b.addEventListener("click", () => {
+      if (b.classList.contains("flip")) return;
+      b.classList.add("flip"); sfx("pop"); burstAt(b, 30);
+      const left = $$(".rcard:not(.flip)", box).length;
+      if (left === 0) {
+        $("#reasonsHint").textContent = "and a million more reasons 💗";
+        setTimeout(() => { sfx("tada"); cannons(1800); }, 500);
+      } else $("#reasonsHint").textContent = `${left} more to go 👀`;
+    });
+    box.appendChild(b);
+  });
+}
+buildReasons();
+
+/* ---------- 8. final ---------- */
+hooks.final = () => {
+  $("#finalHb").textContent = "";
+  typeText($("#finalText"), CONFIG.finalLine, 45).done.then(() => {
+    typeText($("#finalHb"), `Happy Birthday, ${CONFIG.name}! 🎂`, 60);
+    cannons(3000); emojiRain(30);
+  });
+  songOnce();
+};
+$("#replayBtn").addEventListener("click", () => {
+  opened.clear();
+  $$(".gift").forEach((b, i) => { b.classList.remove("done", "open"); b.querySelector(".tag").textContent = "#" + (i + 1); });
+  letterTyped = false; $("#letterBody").textContent = "";
+  if (wishDone) $("#relightBtn").click();
+  buildReasons();
+  go("ask");
+});
+
+/* ---------- chaos button ---------- */
+const CHAOS_LABELS = ["do not press", "I SAID DO NOT PRESS", "again?? 😳", "ok you're just like her", "chaos addict 🌀"];
+let chaosN = 0, chaosOn = false;
+$("#chaosBtn").addEventListener("click", () => {
+  if (chaosOn) return; chaosOn = true; chaosN++; ac(); sfx("boing");
+  document.body.classList.add("chaos");
+  const targets = $$("h1,h2,p,img,button,svg.arc,.girl,.gift,.polaroid,.ribbon,.frame,.paper", current);
+  targets.forEach(el => { el.classList.add("chaos-target"); el.style.rotate = rand(-25, 25).toFixed(0) + "deg"; el.style.scale = rand(.8, 1.25).toFixed(2); });
+  toast(pick(["CHAOS MODE: ON (just like her curls 🌀)", "you were warned ⚠️", "error 418: too much fun", "who let the chaos out?!"]));
+  emojiRain(40); cannons(1400);
+  setTimeout(() => {
+    document.body.classList.remove("chaos");
+    targets.forEach(el => { el.style.rotate = ""; el.style.scale = ""; });
+    setTimeout(() => targets.forEach(el => el.classList.remove("chaos-target")), 400);
+    $("#chaosBtn").textContent = CHAOS_LABELS[Math.min(chaosN, CHAOS_LABELS.length - 1)];
+    chaosOn = false;
+  }, 3200);
+});
+</script>
+</body>
+</html>
